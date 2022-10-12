@@ -26,6 +26,7 @@ then
 
 
 else
+# installation
         echo "system is detected as RHEL"
         yum check-update
         yum update all -y
@@ -33,3 +34,14 @@ else
         systemctl start httpd
         systemctl enable httpd
         echo "Success, apache installed successfully :)"
+        systemctl status apache2 | grep active
+        chmod 755 /var/www
+        chown -R $USER:$USER /var/www
+        
+ # creating a sample file
+ 
+        cd /var/www/html
+        echo "<h1>">>sample.html
+        echo "Hello, it woked :)" >>sample.html
+        echo "</h1>" >>sample.html
+        echo " Hello user,you can view the samplepage on sample.html"
