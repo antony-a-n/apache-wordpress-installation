@@ -1,4 +1,13 @@
 #!/bin/bash
+function sample_file ()
+{
+cd /var/www/html
+        echo "<h1>">>sample.html
+        echo "Hello, it woked :)" >>sample.html
+        echo "</h1>" >>sample.html
+        echo " Hello user,you can view the samplepage on sample.html"
+}
+
 # checking linux distribution
 dis=$(lsb_release -i | cut -f 2)
 if [ $dis = Ubuntu ]
@@ -18,12 +27,7 @@ then
 
 # creating a sample file
 
-        cd /var/www/html
-        echo "<h1>">>sample.html
-        echo "Hello, it woked :)" >>sample.html
-        echo "</h1>" >>sample.html
-        echo " Hello user,you can view the samplepage on sample.html"
-
+        sample_file
 
 else
 # installation
@@ -40,8 +44,4 @@ else
         
  # creating a sample file
  
-        cd /var/www/html
-        echo "<h1>">>sample.html
-        echo "Hello, it woked :)" >>sample.html
-        echo "</h1>" >>sample.html
-        echo " Hello user,you can view the samplepage on sample.html"
+        sample_file
