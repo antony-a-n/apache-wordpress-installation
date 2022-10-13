@@ -1,7 +1,7 @@
 #!/bin/bash
 function sample_file ()
 {
-cd /var/www/html
+        cd /var/www/html
         echo "<h1>">>sample.html
         echo "Hello, it woked :)" >>sample.html
         echo "</h1>" >>sample.html
