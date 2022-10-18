@@ -1,6 +1,5 @@
 #!/bin/bash
 d=$(date |awk '{print $5}')
-#dbb=$(cat wp-config.php | grep DB | awk '{print $3}'|head -n1|sed 's/^.//;s/.$//')
 # checking linux distribution
 
 function sample_file ()
@@ -73,11 +72,10 @@ echo "Please make sure that you have installed and configured MYSQL before proce
 											exit 1
             									else
 											{
+											
 											echo "reinstalling wordpress"
                     									cd /var/www/html
-											#dbb=$(cat wp-config.php | grep DB | awk '{print $3}'|head -n1|sed 's/^.//;s/.$//')
 
-                    									#mysqldump $dbb > $dbb_$d.sql 
 											db_bpk
                     									tar -czf backup.tar.gz *
                     									rm -rf wp-content wp-config.php index.php wp-activate.php wp-admin wp-blog-header.php wp-cron.php wp-load.php wp-login.php wp-settings.php
@@ -143,9 +141,8 @@ if [ -f /etc/debian_version ] ;
         systemctl status apache2 | grep active
         chmod 755 /var/www
         chown -R $USER:$USER /var/www
-
-        # creating a sample file
-read -p "would you like to install wordpress? enter YES or NO: " wp
+# creating a sample file
+	read -p "would you like to install wordpress? enter YES or NO: " wp
 
 		if [ $wp = NO ]
 			then
@@ -201,8 +198,7 @@ read -p "would you like to install wordpress? enter YES or NO: " wp
 				sample_file
 			else 
 				
-				  
-				wp_check	 
+				  wp_check	 
 
 		
 	read -p 'enter the mysql root password: ' password
