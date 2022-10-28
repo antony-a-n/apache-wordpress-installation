@@ -150,7 +150,15 @@ if [ -f /etc/debian_version ] ;
 				final
 				sample_file
 			else 
-				
+			 	mysql --version 1>&2
+				if [ $? -eq 0 ];
+				then 
+					echo "MYSQL installation found,proceeding"
+
+				else
+					echo "MYSQL not found, kindly proceed after configuring MYSQL"
+					exit 1
+				fi
 				  
 				wp_check            				
 					 
@@ -197,8 +205,17 @@ read -p "would you like to install wordpress? enter YES or NO: " wp
 				final
 				sample_file
 			else 
+				mysql --version 1>&2
+				if [ $? -eq 0 ];
+				then 
+					echo "MYSQL installation found,proceeding"
+
+				else
+					echo "MYSQL not found, kindly proceed after configuring MYSQL"
+					exit 1
+				fi
 				
-				  wp_check	 
+				wp_check	 
 
 		
 	read -p 'enter the mysql root password: ' password
