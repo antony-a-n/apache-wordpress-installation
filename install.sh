@@ -58,7 +58,7 @@ function final()
 
 function wp_check ()
 {
-echo "Please make sure that you have installed and configured MYSQL before proceeding"
+#echo "Please make sure that you have installed and configured MYSQL before proceeding"
 
  					if [ -f /var/www/html/wp-config.php ];
      						then
