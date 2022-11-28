@@ -1,6 +1,7 @@
 #!/bin/bash
 d=$(date |awk '{print $5}')
 # checking linux distribution
+cat /etc/os-release |sed -n 's|^ID="\([a-z]\{4\}\).*|\1|p' >distro.txt
 
 function sample_file ()
 
@@ -237,7 +238,66 @@ read -p "would you like to install wordpress? enter YES or NO: " wp
 			systemctl restart apache2
 			final
 			echo "Kindly proceed with finishing the installation"
-		fi		
+		fi	
+		
+		
+elif [ -f distro.txt ];
+then
+
+                        echo "system is detected as amazon linux"
+                        yum check-update
+                        yum update all -y
+                        yum install httpd -y
+                        systemctl start httpd
+                        systemctl enable httpd
+                        echo "Success, apache installed successfully :)"
+                        systemctl status httpd | grep active
+                        chmod 755 /var/www
+                        chown -R $USER:$USER /var/www
+read -p "would you like to install wordpress? enter YES or NO: " wp
+
+                if [ $wp = NO ]
+                        then
+                                systemctl restart apache2
+                                final
+                                sample_file
+                        else
+                                mysql --version 1>&2
+                                if [ $? -eq 0 ];
+                                then
+                                        echo "MYSQL installation found,proceeding"
+
+                                else
+                                        echo "MYSQL not found, kindly proceed after configuring MYSQL"
+                                        exit 1
+                                fi
+
+                                wp_check
+
+
+        read -p 'enter the mysql root password: ' password
+
+                if [ -z "$password" ] ;
+                        then
+                                echo "Please provide the root password"
+                                exit 1
+                fi
+
+
+                        mysql_db
+                        wordpress_install
+
+                        if [ -f /var/www/html/index.html ];
+                                 then
+                                        mv index.html index$d.html
+                        fi
+                        systemctl restart apache2
+                        final
+                        echo "Kindly proceed with finishing the installation"
+                fi
+
+
+
 else 
 	echo -e "unsupported distribution"
 fi
