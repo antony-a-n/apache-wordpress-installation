@@ -258,12 +258,12 @@ then
                         echo "Success, apache installed successfully :)"
                         systemctl status httpd | grep active
                         chmod 755 /var/www
-                        chown -R $USER:$USER /var/www
+                        chown -R apache:apache /var/www/html/*
 read -p "would you like to install wordpress? enter YES or NO: " wp
 
                 if [ $wp = NO ]
                         then
-                                systemctl restart apache2
+                                systemctl restart httpd
                                 final
                                 sample_file
                         else
@@ -296,7 +296,7 @@ read -p "would you like to install wordpress? enter YES or NO: " wp
                                  then
                                         mv index.html index$d.html
                         fi
-                        systemctl restart apache2
+                        systemctl restart httpd
                         final
                         echo "Kindly proceed with finishing the installation"
                 fi
