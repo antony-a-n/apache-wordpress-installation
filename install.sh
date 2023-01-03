@@ -186,7 +186,7 @@ if [ -f /etc/debian_version ] ;
 			final
 			echo "Kindly proceed with finishing the installation"
 		fi		
-elif  [-e /etc/redhat-release ] ;
+elif  [ -f /etc/redhat-release ] ;
 		then
 			
 			echo "system is detected as RHEL"
