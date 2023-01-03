@@ -23,7 +23,7 @@ function wordpress_install ()
         wget -c http://wordpress.org/latest.tar.gz
         tar -xzvf latest.tar.gz
         rsync -av wordpress/* /var/www/html/
-        chown -R www-data:www-data /var/www/html/
+        chown -R $USER:$USER /var/www/html/
         cp wp-config-sample.php wp-config.php
         sed -i "s/database_name_here/$db/;s/username_here/$user/;s/password_here/$pass/" wp-config.php
 }
@@ -95,7 +95,6 @@ function wp_check ()
 										                         then
                                         									mv index.html index$d.html
                         										 fi
-                        										systemctl restart apache2
                         										final
 
 												echo "Kindly proceed with finishing the installation"
