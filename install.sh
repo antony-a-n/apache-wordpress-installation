@@ -130,11 +130,12 @@ function db_bpk()
 
 if [ -f /etc/debian_version ] ;
         then
-        # installation
+        # installation (assuming the ubuntu version is 20.04 or above )
 
         echo "system is detected as ubuntu"
         echo "installing apache2 on your ubuntu machine"
         apt-get update -y
+	apt install php php-cli php-fpm php-json php-common php-mysql php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath
         apt install apache2 -y
         systemctl start apache2
         systemctl enable apache2
@@ -191,6 +192,9 @@ elif  [-f /etc/redhat-release ] ;
 			echo "system is detected as RHEL"
 			yum check-update
 			yum update all -y
+			yum install epel-release -y 
+			rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+			yum --enablerepo=remi-php74 install php -y
 			yum install httpd -y
 			systemctl start httpd
 			systemctl enable httpd 
@@ -246,7 +250,7 @@ then
 
                         echo "system is detected as amazon linux"
                         yum check-update
-			amazon-linux-extras install php7.4 
+			amazon-linux-extras install php7.4 -y
                         yum update all -y
                         yum install httpd -y
                         systemctl start httpd
