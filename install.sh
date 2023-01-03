@@ -186,7 +186,7 @@ if [ -f /etc/debian_version ] ;
 			final
 			echo "Kindly proceed with finishing the installation"
 		fi		
-elif  [-f /etc/redhat-release ] ;
+elif  [-e /etc/redhat-release ] ;
 		then
 			
 			echo "system is detected as RHEL"
@@ -206,7 +206,7 @@ read -p "would you like to install wordpress? enter YES or NO: " wp
 
 		if [ $wp = NO ]
 			then
-				systemctl restart apache2
+				systemctl restart httpd
 				final
 				sample_file
 			else 
@@ -239,7 +239,7 @@ read -p "would you like to install wordpress? enter YES or NO: " wp
 				 then
 					mv index.html index$d.html
 			fi	 
-			systemctl restart apache2
+			systemctl restart httpd
 			final
 			echo "Kindly proceed with finishing the installation"
 		fi	
