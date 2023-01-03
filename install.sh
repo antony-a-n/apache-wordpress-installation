@@ -246,6 +246,7 @@ then
 
                         echo "system is detected as amazon linux"
                         yum check-update
+			amazon-linux-extras install php7.4 
                         yum update all -y
                         yum install httpd -y
                         systemctl start httpd
